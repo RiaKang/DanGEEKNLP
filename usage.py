@@ -1,16 +1,15 @@
 # from konlpy.tag import Okt
 # from tqdm import tqdm
 # from datasets import load_dataset
-#
 # from sklearn.metrics import accuracy_score, recall_score, f1_score
 # from hyperparameters import *
 # from preprocessing import *
-from embedding import *
+# from embedding import *
 import numpy as np
-import joblib
-import requests
-import json
-from math import *
+# import joblib
+# import requests
+# import json
+# from math import *
 
 # Java 서버에서 Input 받기
 
