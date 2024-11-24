@@ -1,11 +1,10 @@
 # from konlpy.tag import Okt
 # from tqdm import tqdm
 # from datasets import load_dataset
-from gensim.models import Word2Vec
-from sklearn.linear_model import LogisticRegression
+#
 # from sklearn.metrics import accuracy_score, recall_score, f1_score
 # from hyperparameters import *
-from preprocessing import *
+# from preprocessing import *
 from embedding import *
 import numpy as np
 import joblib
@@ -16,19 +15,19 @@ from math import *
 # Java 서버에서 Input 받기
 
 # 받은 input 데이터로 AI 결과 출력
-def test(model, real_sents):
-    real_corpus = tokenize_real(real_sents)
-    print(real_corpus)
-    real_cbow = real_x_cbow(real_corpus)
-    pred_real = model.predict(real_cbow)
-
-    print(f'예측값 : {pred_real}')
-
-    pred_real = int(pred_real[0])
-
-    return pred_real
-
-saved_model = joblib.load('./linear_cbow_model.pkl')
+# def test(model, real_sents):
+#     real_corpus = tokenize_real(real_sents)
+#     print(real_corpus)
+#     real_cbow = real_x_cbow(real_corpus)
+#     pred_real = model.predict(real_cbow)
+#
+#     print(f'예측값 : {pred_real}')
+#
+#     pred_real = int(pred_real[0])
+#
+#     return pred_real
+#
+# saved_model = joblib.load('./linear_cbow_model.pkl')
 
 from flask import Flask, request, render_template
 import json
@@ -80,24 +79,24 @@ def receive_string():
     # Spring으로 response 전달
     #return response
 
-@app.route('/receive_string2', methods=['POST'])
-def receive_string2():
-    dto_json = request.get_json()
-
-    #"message", "result" 형식
-    #Spring으로부터 메세지 JSON 객체를 전달받음
-    dto_json = request.get_json()
-
-    dto_json['result'] = test(saved_model, dto_json['message'])
-
-    #dto_json을 dumps 메서드를 사용하여 response에 저장
-    response = json.dumps(dto_json, ensure_ascii=False)
-
-    #Spring에서 받은 데이터를 출력해서 확인
-    print(dto_json)
-
-    #Spring으로 response 전달
-    return response
+# @app.route('/receive_string2', methods=['POST'])
+# def receive_string2():
+#     dto_json = request.get_json()
+#
+#     #"message", "result" 형식
+#     #Spring으로부터 메세지 JSON 객체를 전달받음
+#     dto_json = request.get_json()
+#
+#     dto_json['result'] = test(saved_model, dto_json['message'])
+#
+#     #dto_json을 dumps 메서드를 사용하여 response에 저장
+#     response = json.dumps(dto_json, ensure_ascii=False)
+#
+#     #Spring에서 받은 데이터를 출력해서 확인
+#     print(dto_json)
+#
+#     #Spring으로 response 전달
+#     return response
 
 class Similarity:
     memberId=''
